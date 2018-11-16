@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>丽春院 — 关于我们</title>
+    {include file="public/style"}
+</head>
+<body>
+<div id="page">
+    {include file="public/head"}
+    <div id="body" class="about">
+        {volist name="systems" id="system"}
+        <div class="header">
+            <div>
+                <h1 style="font-family: YouYuan;font-weight: bold;color: #FFFFFF;">关于我们</h1>
+                <h2>{$system.about_title}</h2>
+                <p>{$system.about_content}</p>
+            </div>
+        </div>
+        <div class="body">
+            <div>
+                <img src="/static/index/images/earth-satellite.jpg"  alt="">
+                <h2 style="color: #d5a8ab;  font-family: YouYuan; font-weight: bold;">{$system.ci_title}</h2>
+                <p style="color: #0C0C0C">{$system.ci_content}</p>
+            </div>
+        </div>
+        <div class="footer">
+            <div>
+                <img src="/static/index/images/space-shuttle.png" alt="" style="padding-bottom: 35px;">
+                <h2 style="color: #6b6565;">{$system.cp_title}</h2>
+                <p style="color: #0C0C0C">{$system.about_content}</p>
+            </div>
+        </div>
+        {/volist}
+        <div class="section">
+            <div>
+                <h2 style="color: #000000;  font-family: YouYuan; font-weight: bold;">丽春院百年老店</h2>
+                <p style="color: #0C0C0C">本着一心为客官服务的心做事、我们这里拥有十分美貌的姑娘和周到完美的服务！</p>
+            </div>
+        </div>
+    </div>
+    {include file="public/floor"}
+</div>
+</body>
+</html>

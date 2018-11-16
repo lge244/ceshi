@@ -1,0 +1,42 @@
+{include file="/public/head"}
+<body>
+<!-- 顶部开始 -->
+<div class="container">
+    <div class="logo"><a href="./index.html">PHP中文网后台管理系统</a></div>
+    <ul class="layui-nav right" lay-filter="">
+        <li class="layui-nav-item">
+            <a href="javascript:;">{$username}</a>
+            <dl class="layui-nav-child"> <!-- 二级菜单 -->
+                <dd><a onclick="x_admin_show('个人信息','http://www.baidu.com')">个人信息</a></dd>
+                <dd><a onclick="x_admin_show('切换帐号','http://www.baidu.com')">切换帐号</a></dd>
+                <dd><a href="{:url('Login/LoginOut')}">退出</a></dd>
+            </dl>
+        </li>
+        <li class="layui-nav-item to-index"><a href="/">前台首页</a></li>
+    </ul>
+
+</div>
+<!-- 顶部结束 -->
+<!-- 中部开始 -->
+<!-- 左侧菜单开始 -->
+{include file="/public/left"}
+<!-- <div class="x-slide_left"></div> -->
+<!-- 左侧菜单结束 -->
+<!-- 右侧主体开始 -->
+<div class="page-content">
+    <div class="layui-tab tab" lay-filter="xbs_tab" lay-allowclose="false">
+        <ul class="layui-tab-title">
+            <li class="home"><i class="layui-icon">&#xe68e;</i>我的桌面</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <iframe src='{:url("welcome")}' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 底部结束 -->
+
+</body>
+</html>

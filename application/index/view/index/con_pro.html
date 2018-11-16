@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>丽春院 — 产品详细</title>
+    {include file="public/style"}
+</head>
+<body>
+<div id="page">
+    {include file="public/head"}
+    <div id="body">
+        <div class="header">
+            <div>
+                <h1>产品详细</h1>
+                <img src="{:GetProPic($product.id)}"
+                     style="height: 300px; width: 600px;box-shadow: 0 0 5px #000; border-radius:10px; " alt="">
+                <div style="border-radius:10px; box-shadow: 0 0 5px #6E6E6E;  background: #BDBDBD;   margin-top: 50px;">
+                    <h2 style="padding: 0px; color: #0C0C0C;">{$product.title}</h2>
+                    <p>{:htmlspecialchars_decode($product.content)}</p>
+                    <div class="money" style="margin-right: 10px;">一次价格：{$product.once}￥</div>
+                    <div class="money" style="clear:both; margin-top: 5px; margin-right: 10px;">一夜价格：{$product.over_night}￥</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {include file="public/floor"}
+</div>
+</body>
+</html>

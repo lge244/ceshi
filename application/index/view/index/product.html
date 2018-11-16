@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>丽春院 — 产品展示</title>
+    {include file="public/style"}
+</head>
+<body>
+<div id="page">
+    {include file="public/head"}
+    <div id="body">
+        <div class="header">
+            <div>
+                <h1 style="color: #6E6E6E; font-family: YouYuan; font-weight: bold">产品展示</h1>
+                <ul>
+                    {volist name="products" id="product"}
+                    <li>
+                        <a href=""><img src="{:GetProPic($product.id)}" style="border-radius:10px; box-shadow: 0 0 5px #6E6E6E;  height: 100%;width: 100%; " alt=""></a>
+                        <div>
+                            <h1>{$product.title}</h1>
+                            <p>{$product.desc}</p>
+                            <a href="{:url('Conpro')}?id={$product.id}" class="more">阅读更多</a>
+                        </div>
+                    </li>
+                    {/volist}
+                </ul>
+            </div>
+        </div>
+        <div class="page">
+            <div>
+                {$products|raw}
+            </div>
+        </div>
+    </div>
+</div>
+{include file="public/floor"}
+</body>
+
+</html>

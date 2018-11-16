@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>丽春院 — 新闻详细</title>
+    {include file="public/style"}
+</head>
+<body>
+<div id="page">
+    {include file="public/head"}
+    <div id="body">
+        <div class="header">
+            <div>
+                <h1 style="color: #6E6E6E; font-family: YouYuan; font-weight: bold">新闻详细</h1>
+                <div class="article">
+                    <img src="{:GetNewsPic($new.id)}" style="border-radius:10px; box-shadow: 0 0 5px #6E6E6E;   width: 560px;height: 240px;" alt="">
+                    <div style="border-radius:10px; box-shadow: 0 0 5px #6E6E6E; background: #BDBDBD; padding: 20px;">
+                        <h1 style=" text-align:center; color: #000;">{$new.title}</h1>
+                        <span style="color: #0C0C0C">{$new.time|date="Y-m-d"}</span>
+                        <p>{:htmlspecialchars_decode($new.content)}</p></div>
+                </div>
+                <div class="sidebar">
+                    <ul>
+                        {volist name="hotNews" id="hotNew"}
+                        <li>
+                            <h1>热门新闻</h1>
+                            <a href="{:url('ConNew')}?id={$hotNew.id}"><img src="{:GetNewsPic($hotNew.id)}" style="border-radius:10px; box-shadow: 0 0 5px #6E6E6E;   width: 340px;height: 188px;" alt=""></a>
+                            <h2>{$hotNew.title}</h2>
+                            <span>{$hotNew.desc}</span>
+                        </li>
+                        {/volist}
+                        <li>
+                            <h1>最新发布</h1>
+                            <ul>
+                                {volist name="newNews" id="newNew"}
+                                <li>
+                                    <a href="{:url('ConNew')}?id={$newNew.id}"><img src="{:GetNewsPic($newNew.id)}" style="border-radius:10px; box-shadow: 0 0 2px #6E6E6E;   width: 60px;height: 55px;" alt=""></a>
+                                    <h2 style="font-size: 15px;">{$newNew.title}</h2>
+                                    <span>{$newNew.time|date="Y-m-d"}</span>
+                                </li>
+                                {/volist}
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    {include file="public/floor"}
+</div>
+</body>
+</html>

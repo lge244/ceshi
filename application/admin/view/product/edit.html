@@ -1,0 +1,127 @@
+{include file="/public/head"}
+<body>
+<div class="x-body">
+    <form class="layui-form">
+        <div class="layui-form-item">
+            <label for="title" class="layui-form-label">
+                <span class="x-red">*</span>产品标题
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="title" name="title" value="{$product.title}" required="" lay-verify="required"
+                       autocomplete="off" class="layui-input">
+                <input type="hidden" id="id" name="id" value="{$product.id}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="desc" class="layui-form-label">
+                <span class="x-red">*</span>简介
+            </label>
+
+            <div class="layui-input-inline">
+                <textarea placeholder="请输入内容" id="desc" name="desc" class="layui-textarea">{$product.desc}</textarea>
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label for="desc" class="layui-form-label">
+                内容
+            </label>
+            <div class="layui-input-block" id="editor">
+                {:htmlspecialchars_decode($product.content)}
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="once" class="layui-form-label">
+                <span class="x-red">*</span>一次价格
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="once" name="once" value="{$product.once}" required="" lay-verify="required"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="over_night" class="layui-form-label">
+                <span class="x-red">*</span>一夜价格
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="over_night" name="over_night" value="{$product.over_night}" required=""
+                       lay-verify="required"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="L_repass" class="layui-form-label">
+            </label>
+            <button class="layui-btn" lay-filter="add" lay-submit="">
+                发布
+            </button>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="__ADMIN__/js/wangEditor.js"></script>
+<script>
+    layui.use(['form', 'layer'], function () {
+        $ = layui.jquery;
+        var form = layui.form
+            , layer = layui.layer;
+
+        //配置wangEditor富文本编辑器
+        ////将要用到的对象添加到全局
+        var E = window.wangEditor
+
+        //生成editor对象
+        var editor = new E('#editor')
+
+        //设置图片上传的控件名称:类似于input的name属性,供接口获取图片信息使用
+        editor.customConfig.uploadFileName = 'img'
+
+        //设置服务上的图片上传处理接口脚本
+        editor.customConfig.uploadImgServer = '{:url("upload")}'
+
+        //创建出富文件编辑器
+        editor.create()
+
+        //自定义验证规则
+        form.verify({
+            nikename: function (value) {
+                if (value.length < 5) {
+                    return '产品标题至少得5个字符啊';
+                }
+            }
+        });
+
+        //监听提交
+        form.on('submit(add)', function (data) {
+            console.log(data);
+            //发异步，把数据提交给php
+            $.post('{:url(\'DoEdit\')}', {
+                'id': $('#id').val(),
+                'title': $('#title').val(),
+                'desc': $('#desc').val(),
+                'content': editor.txt.html(),
+                'once': $('#once').val(),
+                'over_night': $('#over_night').val(),
+            }, function (data) {
+                if (data.res == 1) {
+                    layer.alert(data.msg, {icon: 6}, function () {
+                        // 获得frame索引
+                        var index = parent.layer.getFrameIndex(window.name);
+                        //关闭当前frame
+                        parent.layer.close(index);
+                    });
+                } else {
+                    layer.alert(data.msg, {icon: 6}, function () {
+                        // 获得frame索引
+                        var index = parent.layer.getFrameIndex(window.name);
+                        //关闭当前frame
+                        parent.layer.close(index);
+                    });
+                }
+            })
+
+            return false;
+        });
+    });
+</script>
+</body>
+
+</html>
